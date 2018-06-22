@@ -4,6 +4,25 @@ int n;
 int k;
 int A[100000];
 
+int p(int m){
+    int w, l;
+    w = 0;
+    l = 1;
+    int i;
+    for(i = 0; i < n; i++){
+        if(A[i] > m){
+            return 0;
+        }
+        else{
+        w = w + A[i];
+        if(w > m){
+            w = A[i];
+            l = l + 1;
+        }
+      }
+    }
+  return l <= k;
+}
 
 int main(){
   int i, lb, ub;
@@ -11,7 +30,17 @@ int main(){
   for(i = 0; i < n; i++){
     scanf("%d", &A[i]);
   }
-
-
+    lb = 0;
+    ub = 1000000000;
+    while(ub - lb > 1){
+      int m = (lb + ub) / 2;
+    if(p(m)){
+      ub = m;
+    }
+    else {
+      lb = m;
+    }
+  }
+  printf("%d\n", ub);
   return 0;
 }
